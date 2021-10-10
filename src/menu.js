@@ -1,28 +1,20 @@
-const { app, Menu } = require('electron')
+import { Menu, shell } from 'electron'
+import { onOpenFile } from './app'
+import packageJson from '../package.json'
+
 const isMac = process.platform === 'darwin'
 
 const template = [
-  {
-    label: app.name,
-    submenu: [
-      { role: 'about' },
-      { type: 'separator' },
-      { role: 'services' },
-      { type: 'separator' },
-      { role: 'hide' },
-      { role: 'hideOthers' },
-      { role: 'unhide' },
-      { type: 'separator' },
-      { role: 'quit' }
-    ]
-  },
+  { role: 'appMenu' },
   {
     label: 'File',
     submenu: [
+      { label: 'Open', accelerator: 'CommandOrControl+O', click: (_, __) => onOpenFile() },
       isMac ? { role: 'close' } : { role: 'quit' }
     ]
   },
   { role: 'editMenu' },
+  { role: 'viewMenu' },
   {
     label: 'Window',
     submenu: [
@@ -39,7 +31,18 @@ const template = [
             { role: 'close' }
           ])
     ]
+  },
+  {
+    role: 'help',
+    submenu: [
+      {
+        label: 'Learn More',
+        click: async () => {
+          await shell.openExternal(packageJson.repository)
+        }
+      }
+    ]
   }
 ]
 
-module.exports = Menu.buildFromTemplate(template)
+export default Menu.buildFromTemplate(template)
