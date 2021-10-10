@@ -11,6 +11,7 @@
       html = entry.html
     })
 
+    // TODO: why is this necessary?
     setTimeout(() => ipc.reload(file), 500)
   })
 </script>

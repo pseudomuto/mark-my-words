@@ -1,6 +1,6 @@
 import { BrowserWindow } from 'electron'
 import path from 'path'
-import { startWatching, stopWatching } from './watch-list'
+import watchList from './watch-list'
 
 const webPreferences = {
   preload: path.join(__dirname, 'preload.js'),
@@ -21,10 +21,10 @@ export default (url, filePath) => {
   win.loadURL(`${url}#${filePath}`)
 
   win.once('ready-to-show', () => {
-    startWatching(win, filePath)
+    watchList.startWatching(win, filePath)
     win.show()
   })
 
-  win.on('close', () => { stopWatching(win) })
+  win.on('close', () => { watchList.stopWatching(win) })
   return win
 }
