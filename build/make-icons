@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+main() {
+  npx electron-icon-maker -i build/icon.png -o ./build
+  mv build/icons/mac/icon.icns public/icon.icns
+  mv build/icons/win/icon.ico public/icon.ico
+  mv build/icons/png/256x256.png public/icon.png
+
+  rm -rf build/icons
+}
+
+main "$@"

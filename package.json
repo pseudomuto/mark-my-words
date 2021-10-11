@@ -1,16 +1,23 @@
 {
   "name": "mark-my-words",
+  "license": "MIT",
   "productName": "Mark My Words",
   "version": "0.1.0",
   "private": true,
+  "config": {
+    "forge": "forge.config.js"
+  },
   "main": "index.js",
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",
-    "start": "electron .",
+    "start": "electron-forge start",
     "lint": "standard",
     "format": "standard --fix",
-    "test": "jest --coverage --verbose"
+    "test": "jest --coverage --verbose",
+    "package": "electron-forge package",
+    "make": "electron-forge make",
+    "makeIcon": "./build/make-icons"
   },
   "repository": "https://github.com/pseudomuto/mark-my-words",
   "standard": {
@@ -25,11 +32,13 @@
   "devDependencies": {
     "@babel/core": "^7.15.8",
     "@babel/preset-env": "^7.15.8",
+    "@electron-forge/cli": "^6.0.0-beta.61",
+    "@electron-forge/maker-dmg": "^6.0.0-beta.61",
     "@rollup/plugin-commonjs": "^17.0.0",
     "@rollup/plugin-node-resolve": "^11.0.0",
     "babel-jest": "^27.2.4",
     "electron": "^15.1.1",
-    "electron-reloader": "^1.2.1",
+    "electron-icon-maker": "^0.0.5",
     "jest": "^27.2.4",
     "rollup": "^2.3.4",
     "rollup-plugin-css-only": "^3.1.0",
@@ -42,6 +51,8 @@
   },
   "dependencies": {
     "chokidar": "^3.5.2",
+    "electron-reloader": "^1.2.1",
+    "electron-squirrel-startup": "^1.0.0",
     "esm": "^3.2.25",
     "marked": "^3.0.7"
   }
